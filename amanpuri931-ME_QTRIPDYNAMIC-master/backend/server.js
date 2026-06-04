@@ -22,6 +22,18 @@ app.use(express.urlencoded({ extended: true }));
 const PORT = 8082;
 
 /*
+[GET API] root route — confirms the backend is up and lists available endpoints.
+Prevents the confusing "Cannot GET /" message when the base URL is opened in a browser.
+*/
+app.get("/", (req, res) => {
+  return res.json({
+    status: "ok",
+    message: "QTrip backend is running",
+    endpoints: ["/cities", "/adventures?city=<id>", "/adventures/detail?adventure=<id>", "/reservations"],
+  });
+});
+
+/*
 [GET API] used in module 1 to fetch data for all cities
 The response is an [array] of cities with each having the following structure :
 {
